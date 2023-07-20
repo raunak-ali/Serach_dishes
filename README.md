@@ -1,7 +1,12 @@
 # Serach_dishes
 A Template based django search application that can search through the names of dishes and recommend the best match for the same.
 # Populating Sqlite DB from he given csv/excel:-
-Model Structure:-
+Excel sheet details :-
+fulldetails:-
+    Location=Dictionary
+    User_rattig=Dictionary
+    Offers=List
+# Model Structure:-
 Restaurants:-
     id  
     Name
