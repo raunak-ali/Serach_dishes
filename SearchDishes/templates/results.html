@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<head>  
+</head>
+<main>
+  <h1>Results</h1>
+  {% if results%}
+  YES YES
+
+
+  {% for dish in results %}
+            <li>{{ dish.dish_name }} - {{ dish.price }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No results found.</p>
+{% endif %} 
+
+  
+  <section id="section"><h2></h2></section>
+    
+</main>
+
+
+
+{% endblock %}

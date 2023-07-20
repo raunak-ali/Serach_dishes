@@ -5,7 +5,38 @@ import csv
 import json
 import ast
 import re
+from django.db.models import Q
+from .forms import DishForm
 from .models import Restaurant, Dish, Location, UserRating
+
+
+def search(request):
+    form = DishForm()
+    if request.method == 'POST':
+        form = DishForm(request.POST)
+        if form.is_valid():
+            dish_name = form.cleaned_data.get('dish_name')
+            price = form.cleaned_data.get('price')
+            # Initialize the query without any filters
+            query = Q()
+
+            # Perform the search using Q objects
+            # Check if the dish_name field is not empty
+            if dish_name:
+                query |= Q(dish_name__icontains=dish_name)
+
+            # Check if the price field is not empty
+            if price:
+                query |= Q(price__icontains=price)
+
+            # Perform the search based on the combined query
+            results = Dish.objects.filter(query)
+            print(results)
+        else:
+            results = None
+        return render(request,"results.html",{'results': results, 'form': form})
+    return render(request,"form.html",context={"form":form})
+    
 
     
 

@@ -20,5 +20,6 @@ from django.urls import path
 from App import views
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("",views.Populate,name="Populate"),
+    path("populate/",views.Populate,name="Populate"),
+    path("SERACH/",views.search,name="Serach"),
 ]

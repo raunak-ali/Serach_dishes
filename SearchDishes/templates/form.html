@@ -1,0 +1,21 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<head>  
+</head>
+<main>
+  <h1>Search A  Dish</h1>
+  <form method="post">
+    {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Submit</button>
+  </div>
+  </form>
+  
+  <section id="section"><h2></h2></section>
+    
+</main>
+
+
+
+{% endblock %}
