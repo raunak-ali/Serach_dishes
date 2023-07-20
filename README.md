@@ -8,6 +8,8 @@ fulldetails:-
     Offers=List
 # Model Structure:-
 Restaurants:-
+
+
     id  
     Name
     lat_long
@@ -25,6 +27,8 @@ Restaurants:-
     items(LList of Dish id's)
 
 Dishes:-
+
+
     id
     Restaurant(Foreign-Key)
     Dish Name(TEXT)
@@ -40,6 +44,8 @@ Location:-
     country_id
     locality_verbose
 User_Rating:-
+
+
     Votes
     Rating text
     Rating color
