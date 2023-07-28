@@ -1,6 +1,9 @@
 from django.contrib import admin
-from App.models import Location,UserRating,Restaurant,Dish 
+from App.models import Location,UserRating,Restaurant,Dish,User_Profile
 # Register your models here.
+
+
+admin.site.register(User_Profile)
 
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):

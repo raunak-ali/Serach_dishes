@@ -22,4 +22,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("populate/",views.Populate,name="Populate"),
     path("SERACH/",views.search,name="Serach"),
+    path("Login/",views.User_Login,name="Login"),
+
 ]

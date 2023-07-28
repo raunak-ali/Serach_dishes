@@ -4,6 +4,11 @@
 <head>  
 </head>
 <main>
+  {% if Serach_History%}
+  {{Serach_History}}
+  {% else %}
+  NO serach History
+  {% endif %}
   <h1>Search A  Dish</h1>
   <form method="post">
     {% csrf_token %}

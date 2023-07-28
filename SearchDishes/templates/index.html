@@ -5,5 +5,10 @@
 </head>
 <body>
   HELo
+  {% if User_prof %}
+  {{ User_prof.User.username }}
+  {% else %}
+  USER AUTENTICATION FAILED
+  {% endif %}
 </body>
 </html>

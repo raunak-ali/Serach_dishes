@@ -1,4 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import User
+
+class User_Profile(models.Model):
+    User=models.ForeignKey(User,on_delete=models.CASCADE)
+    Serach_History=models.CharField(max_length=10000,null=True,blank=True)
+
 
 # Create your models here.
 class Location(models.Model):

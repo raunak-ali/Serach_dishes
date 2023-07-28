@@ -6,12 +6,39 @@ import json
 import ast
 import re
 from django.db.models import Q
-from .forms import DishForm
-from .models import Restaurant, Dish, Location, UserRating
+from .forms import DishForm,Loginform
+from .models import Restaurant, Dish, Location, UserRating,User_Profile
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
+
+
+def User_Login(request):
+    form=Loginform()
+    if request.method == 'POST':
+        form = Loginform(request.POST)
+        if form.is_valid():
+            username=form.cleaned_data.get("username")
+            password=form.cleaned_data.get("Password")
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                User_=User.objects.get(username=user.username)
+                print(User_.username)
+                User_prof=User_Profile.objects.get_or_create(User=User_)
+                return render(request,"index.html",{'User_prof': User_prof})
+            else:
+                return render(request,"index.html",)
+                
+            
+        else:
+            return render(request,"form.html",context={"form":form})
+    return render(request,"form.html",context={"form":form})
 
 
 def search(request):
     form = DishForm()
+    User_=request.user
+    User_prof=User_Profile.objects.get(User=User_)
+    Serach_History=User_prof.Serach_History
     if request.method == 'POST':
         form = DishForm(request.POST)
         if form.is_valid():
@@ -31,11 +58,33 @@ def search(request):
 
             # Perform the search based on the combined query
             results = Dish.objects.filter(query)
+            if Serach_History:
+                Serach_History+=dish_name
+                Search_list=Serach_History.split(",")
+                if len(Search_list)>5:
+                    Search_list[0]=""
+            else:
+                Serach_History=dish_name
+
+            User_prof.save(Serach_History=Serach_History)
+
+           
+
+            
+        
+
+
+
+
+            
+
+
+
             print(results)
         else:
             results = None
-        return render(request,"results.html",{'results': results, 'form': form})
-    return render(request,"form.html",context={"form":form})
+        return render(request,"results.html",{'results': results, 'form': form ,'Serach_History':Serach_History})
+    return render(request,"form.html",context={"form":form,'Serach_History':Serach_History})
     
 
     
